@@ -1,0 +1,26 @@
+workflows:
+  voice-changer-android:
+    name: Voice Changer Android APK
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      flutter: stable
+      java: 17
+
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Check Flutter project
+        script: flutter analyze
+
+      - name: Build Android APK
+        script: flutter build apk --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+
+    publishing:
+      email:
+        recipients: []
